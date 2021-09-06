@@ -238,7 +238,7 @@ Full example:
 </html>
 ```
 
-#### Open device camera using MediaDevices Web Api
+#### Open device camera using MediaDevices Web Api in Netway
 
 For accessing device camera from a web page please read this link:
 
