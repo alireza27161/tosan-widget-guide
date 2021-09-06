@@ -185,10 +185,64 @@ The body of response is a list of the below object
 "balance":"DEPOSIT-BALANCE"
 ```
 
+### Using Device Camera
 
+#### Open Jetway application's camera module and scan qr code
 
+First of all write a function named onMessage and assign this function to ReactNativeWebView object.
+This function have a param filled by qr data and called when qr code scanned.
 
+```
+function onMessage(data) {
+   document.getElementById("div").innerHTML = "Camera Data: " + data;
+}
+window.ReactNativeWebView.onMessage = onMessage;
+```
 
+Then create a js function to communicate with Jetway application for openning camera like this:
+
+```
+function openCamera() {
+   var data = JSON.stringify({action: 'openCamera'});
+   window.ReactNativeWebView.postMessage(data);
+}
+```
+
+and call it like this:
+
+```
+<button onclick="openCamera()">Open Camera</button>
+```
+
+Full example:
+
+```
+<html lang="en">
+   <head>
+       <meta name="viewport" content="width=device-width, initial-scale=1">
+       <script>
+           function onMessage(data) {
+               document.getElementById("div").innerHTML = "Camera Data: " + data;
+           }
+           window.ReactNativeWebView.onMessage = onMessage;
+           function openCamera() {
+               var data = JSON.stringify({action: 'openCamera'});
+               window.ReactNativeWebView.postMessage(data);
+           }
+       </script>
+   </head>
+	<body>
+		<h1 id="div">Camera: </h1>
+		<button onclick="openCamera()">Open Camera</button>
+	</body>
+</html>
+```
+
+#### Open device camera using MediaDevices Web Api
+
+For accessing device camera from a web page please read this link:
+
+> https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia
 
 
 
